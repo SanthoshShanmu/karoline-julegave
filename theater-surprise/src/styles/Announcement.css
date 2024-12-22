@@ -1,0 +1,14 @@
+.announcement {
+    text-align: center;
+    padding: 2rem;
+    background: linear-gradient(135deg, #1a472a, #2a623d);
+    min-height: 100vh;
+    color: white;
+  }
+  
+  .details {
+    margin-top: 2rem;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+  }
