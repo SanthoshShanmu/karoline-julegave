@@ -13,3 +13,21 @@
   margin: 0;
   padding: 0;
 }
+
+.music-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: none;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  cursor: pointer;
+  z-index: 1000;
+  font-size: 1rem;
+}
+
+.music-toggle:hover {
+  background: rgba(255, 255, 255, 0.3);
+}

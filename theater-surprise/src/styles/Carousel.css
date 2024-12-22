@@ -10,7 +10,8 @@
   position: absolute;
   width: 100%;
   height: 100%;
-  animation: rotate 20s linear infinite;
+  animation: rotate linear infinite;
+  transform-origin: center center;
 }
 
 .carousel-item {
@@ -19,16 +20,21 @@
   top: 50%;
   width: clamp(40px, 25%, 80px);
   height: clamp(40px, 25%, 80px);
-  transform-origin: center;
+  transform-origin: center center;
   font-size: clamp(2rem, 6vw, 4rem);
   display: flex;
   align-items: center;
   justify-content: center;
+  margin: -20px;
 }
 
 @keyframes rotate {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .carousel-item:nth-child(1) { transform: rotate(0deg) translateY(-100px) rotate(0deg); }
