@@ -41,7 +41,7 @@ function App() {
         onClick={togglePlay} 
         className="music-toggle"
       >
-        {isPlaying ? '🔇 Mute' : '🔊 Play Music'}
+        {isPlaying ? '🔇 Skru av litt julestemning' : '🔊 Sett på litt julestemning'}
       </button>
       <audio ref={audioRef} loop>
         <source src="/Mariah Carey - All I Want for Christmas Is You (Make My Wish Come True Edition).mp3" type="audio/mp3" />

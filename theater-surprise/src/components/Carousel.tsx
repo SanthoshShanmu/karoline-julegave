@@ -1,7 +1,7 @@
 import '../styles/Carousel.css'
 
 const Carousel = ({ speed }: { speed: number }) => {
-  const items = ['🐎', '🐎', '🐎', '🐎', '🐎', '🐎']
+  const items = ['🎠', '🎠', '🎠', '🎠', '🎠', '🎠']
   const radius = 100 // pixels from center
 
   return (

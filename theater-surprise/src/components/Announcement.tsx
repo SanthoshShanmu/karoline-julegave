@@ -32,8 +32,9 @@ const Announcement = () => {
           {showDetails ? (
             <>
               <h2>Vi skal se musikalen "Karusell" på Nationaltheatret!</h2>
-              <p>16 Januar kl. 19.30 med date først</p>
-              <p>God Jul!🎄</p>
+              <p>16 Januar kl. 19.30 med middag før det 💗</p>
+                <p>Her er mer info: <a href="https://www.nationaltheatret.no/forestillinger/karusell/" target="_blank" rel="noopener noreferrer">Info</a></p>
+              <p>Sees på søndag, god jul i mellomtiden!🎄</p>
             </>
           ) : (
             <>
