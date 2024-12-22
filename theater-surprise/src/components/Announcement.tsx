@@ -4,7 +4,7 @@ import '../styles/Announcement.css'
 const Announcement = () => {
   return (
     <div className="announcement">
-      <h1>🎭 Overraskelse! 🎭</h1>
+      <h1>🎭 Her er julegaven! 🎭</h1>
       <div className="announcement-content">
         <div className="carousel-column">
           <Carousel />

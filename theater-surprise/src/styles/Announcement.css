@@ -13,12 +13,21 @@
 
 .announcement-content {
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .carousel-column, .details-column {
   flex: 1;
   margin: 10px;
+  min-width: 300px; /* Adjust this value as needed */
+}
+
+@media (max-width: 768px) {
+  .announcement-content {
+    flex-direction: column;
+  }
 }
 
 .details {
