@@ -6,6 +6,7 @@ import '../styles/Announcement.css'
 const Announcement = () => {
   const [showDetails, setShowDetails] = useState(false)
   const [carouselSpeed, setCarouselSpeed] = useState(20)
+  const [showNotification, setShowNotification] = useState(false)
 
   const handleAnswer = (answer: string) => {
     if (answer === 'Karusell') {
@@ -16,13 +17,19 @@ const Announcement = () => {
         origin: { y: 0.6 }
       })
     } else {
-      alert('Prøv igjen!')
+      setShowNotification(true)
       setCarouselSpeed(prev => Math.max(prev * 0.25, 1))
+      setTimeout(() => setShowNotification(false), 2500)
     }
   }
 
   return (
     <div className="announcement">
+      {showNotification && (
+        <div className="notification">
+          Prøv igjen!
+        </div>
+      )}
       <h1>🎭 Her er julegaven! 🎭</h1>
       <div className="announcement-content">
         <div className="carousel-column">
