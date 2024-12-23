@@ -6,7 +6,7 @@ import './App.css'
 function App() {
   const [showAnnouncement, setShowAnnouncement] = useState(false)
   const audioRef = useRef<HTMLAudioElement>(null)
-  const targetDate = new Date('2024-12-24T00:00:00')
+  const targetDate = new Date('2024-12-24T20:00:00')
   const [isPlaying, setIsPlaying] = useState(false)
 
   const togglePlay = () => {
