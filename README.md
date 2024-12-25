@@ -15,7 +15,7 @@ git clone https://github.com/yourusername/karoline-julegave.git
 ```
 Navigate to the project directory:
 ```bash
-cd karoline-julegave
+cd theater-surprise
 ```
 
 ## Usage
