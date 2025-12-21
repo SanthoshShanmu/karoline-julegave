@@ -76,7 +76,6 @@ const Announcement = () => {
     <div className="announcement">
       {/* Background decorations */}
       <div className="london-skyline"></div>
-      <div className="castle-silhouette"></div>
       
       {showNotification && (
         <div className="notification">
