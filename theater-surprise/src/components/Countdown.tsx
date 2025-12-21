@@ -89,10 +89,10 @@ const Countdown = () => {
       <div className="countdown-footer">
         <p className="hint-text">🎁 Noe magisk er på vei... 🎁</p>
         <div className="disney-icons">
-          <span className="floating-icon" style={{ animationDelay: '0s' }}>🎭</span>
-          <span className="floating-icon" style={{ animationDelay: '0.3s' }}>⛸️</span>
-          <span className="floating-icon" style={{ animationDelay: '0.6s' }}>🇬🇧</span>
-          <span className="floating-icon" style={{ animationDelay: '0.9s' }}>✨</span>
+          <span className="floating-icon" style={{ animationDelay: '0s' }}>💖</span>
+          <span className="floating-icon" style={{ animationDelay: '0.3s' }}>⚡</span>
+          <span className="floating-icon" style={{ animationDelay: '0.6s' }}>❄️</span>
+          <span className="floating-icon" style={{ animationDelay: '0.9s' }}>👑</span>
         </div>
       </div>
     </div>
