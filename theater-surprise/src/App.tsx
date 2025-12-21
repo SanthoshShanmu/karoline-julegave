@@ -6,7 +6,7 @@ import './App.css'
 function App() {
   const [showAnnouncement, setShowAnnouncement] = useState(false)
   const audioRef = useRef<HTMLAudioElement>(null)
-  const targetDate = new Date('2024-12-24T20:00:00')
+  const targetDate = new Date('2025-12-24T18:00:00')
   const [isPlaying, setIsPlaying] = useState(false)
 
   const togglePlay = () => {
@@ -26,10 +26,11 @@ function App() {
   }, [])
 
   useEffect(() => {
-    // Start playing when component mounts
     if (audioRef.current) {
-      audioRef.current.volume = 0.5 // Set volume to 50%
-      audioRef.current.play().catch(error => {
+      audioRef.current.volume = 0.5
+      audioRef.current.play().then(() => {
+        setIsPlaying(true)
+      }).catch(error => {
         console.log('Auto-play was prevented:', error)
       })
     }
@@ -37,11 +38,22 @@ function App() {
 
   return (
     <div className="app">
+      {/* Floating magical elements */}
+      <div className="magic-particles">
+        {[...Array(20)].map((_, i) => (
+          <div key={i} className="sparkle" style={{
+            left: `${Math.random() * 100}%`,
+            animationDelay: `${Math.random() * 5}s`,
+            animationDuration: `${3 + Math.random() * 4}s`
+          }}>✨</div>
+        ))}
+      </div>
+      
       <button 
         onClick={togglePlay} 
         className="music-toggle"
       >
-        {isPlaying ? '🔇 Skru av litt julestemning' : '🔊 Sett på litt julestemning'}
+        {isPlaying ? '🔇 Pause musikk' : '🎵 Spill musikk'}
       </button>
       <audio ref={audioRef} loop>
         <source src="/Mariah Carey - All I Want for Christmas Is You (Make My Wish Come True Edition).mp3" type="audio/mp3" />
