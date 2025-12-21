@@ -260,7 +260,7 @@ const Announcement = () => {
               God jul, og gleder meg til mars! 🎄✨
             </p>
             <div className="hearts">
-              {'💕💖💕'.split('').map((heart, i) => (
+              {['💕', '💖', '💕'].map((heart, i) => (
                 <span key={i} className="floating-heart" style={{ animationDelay: `${i * 0.2}s` }}>
                   {heart}
                 </span>
