@@ -10,7 +10,7 @@ const Countdown = () => {
   })
 
   useEffect(() => {
-    const target = new Date('2025-12-24T18:00:00')
+    const target = new Date('2025-12-24T20:00:00')
     
     const calculateTimeLeft = () => {
       const now = new Date()
@@ -61,7 +61,7 @@ const Countdown = () => {
         <span className="magic-gradient">✨ En magisk overraskelse venter! ✨</span>
       </h1>
       
-      <p className="countdown-subtitle">Julaften kl. 18:00 kan du åpne gaven!</p>
+      <p className="countdown-subtitle">Julaften kl. 20:00 kan du åpne gaven!</p>
 
       <div className="timer">
         <div className="timer-block">
