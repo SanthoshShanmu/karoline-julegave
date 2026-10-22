@@ -1,65 +1,72 @@
-import { useState, useEffect, useRef } from 'react'
-import Countdown from './components/Countdown'
-import Announcement from './components/Announcement'
-import './App.css'
+import { useState } from 'react'
+import Cover from './components/Cover'
+import ScratchDate from './components/ScratchDate'
+import Quiz from './components/Quiz'
+import DayJourney from './components/DayJourney'
+import Itinerary from './components/Itinerary'
+import { CHAPTERS } from './data/day'
+import { celebrate } from './celebrate'
+
+type Stage = 'cover' | 'date' | 'quiz' | 'journey' | 'itinerary'
+
+const SEEN_KEY = 'karoline-bursdag-sett'
+
+function readSeen() {
+  try {
+    return localStorage.getItem(SEEN_KEY) === '1'
+  } catch {
+    return false
+  }
+}
+
+// In dev, jump straight to a stage with e.g. localhost:5173/#itinerary
+const initialStage = (import.meta.env.DEV && (window.location.hash.slice(1).split('-')[0] as Stage)) || 'cover'
 
 function App() {
-  const [showAnnouncement, setShowAnnouncement] = useState(false)
-  const audioRef = useRef<HTMLAudioElement>(null)
-  const targetDate = new Date('2025-12-24T18:00:00')
-  const [isPlaying, setIsPlaying] = useState(false)
+  const [stage, setStage] = useState<Stage>(initialStage)
+  const [seenBefore, setSeenBefore] = useState(readSeen)
 
-  const togglePlay = () => {
-    if (audioRef.current) {
-      if (isPlaying) {
-        audioRef.current.pause()
-      } else {
-        audioRef.current.play()
-      }
-      setIsPlaying(!isPlaying)
-    }
+  const goTo = (next: Stage) => {
+    setStage(next)
+    window.scrollTo({ top: 0 })
   }
 
-  useEffect(() => {
-    const now = new Date()
-    setShowAnnouncement(now >= targetDate)
-  }, [])
-
-  useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.volume = 0.5
-      audioRef.current.play().then(() => {
-        setIsPlaying(true)
-      }).catch(error => {
-        console.log('Auto-play was prevented:', error)
-      })
+  const finish = () => {
+    try {
+      localStorage.setItem(SEEN_KEY, '1')
+    } catch {
+      // Private mode – the skip link just won't show next time
     }
-  }, [])
+    setSeenBefore(true)
+    goTo('itinerary')
+    setTimeout(celebrate, 300)
+  }
 
   return (
-    <div className="app">
-      {/* Floating magical elements */}
-      <div className="magic-particles">
-        {[...Array(20)].map((_, i) => (
-          <div key={i} className="sparkle" style={{
-            left: `${Math.random() * 100}%`,
-            animationDelay: `${Math.random() * 5}s`,
-            animationDuration: `${3 + Math.random() * 4}s`
-          }}>✨</div>
-        ))}
-      </div>
-      
-      <button 
-        onClick={togglePlay} 
-        className="music-toggle"
-      >
-        {isPlaying ? '🔇 Pause musikk' : '🎵 Spill musikk'}
-      </button>
-      <audio ref={audioRef} loop>
-        <source src="/Mariah Carey - All I Want for Christmas Is You (Make My Wish Come True Edition).mp3" type="audio/mp3" />
-      </audio>
-      {showAnnouncement ? <Announcement /> : <Countdown />}
-    </div>
+    <main className={`app stage-${stage}`}>
+      {stage === 'cover' && (
+        <Cover
+          onOpen={() => {
+            celebrate()
+            goTo('date')
+          }}
+          onSkip={seenBefore ? () => goTo('itinerary') : undefined}
+        />
+      )}
+      {stage === 'date' && <ScratchDate onNext={() => goTo('quiz')} />}
+      {stage === 'quiz' && (
+        <Quiz
+          onCorrect={() => goTo('journey')}
+        />
+      )}
+      {stage === 'journey' && (
+        <DayJourney
+          onDone={finish}
+          onChapter={(i) => CHAPTERS[i].id === 'paella' && celebrate()}
+        />
+      )}
+      {stage === 'itinerary' && <Itinerary onReplay={() => goTo('cover')} />}
+    </main>
   )
 }
 

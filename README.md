@@ -1,31 +1,30 @@
-# Karoline Julegave
+# Per a Karoline 🍊
 
-## Project Description
-This project is dedicated to creating a special Christmas gift for Karoline. The goal is to develop a unique and personalized present that showcases creativity and thoughtfulness.
+A birthday gift for Karoline: an interactive page that unveils a day in Valencia on
+**Saturday 7 November 2026** – the *My First Paella* workshop (Ruzafa market, tapas, cooking)
+and dinner at Living Bakkali at 20:30.
 
-## Features
-- Personalized messages
-- Customizable design
-- Interactive elements
+(Previously her Christmas gift – the Disney London weekend lives in the git history.)
 
-## Installation
-To get started with the project, clone the repository:
+## Flow
+
+1. **Cover** – azulejo arch with a countdown teaser; tap the wax seal to open.
+2. **Scratch card** – scratch the tile to reveal the date.
+3. **Quiz** – guess what we're cooking.
+4. **The day** – six chapters; the sky moves from morning sun to night as you go.
+5. **Programme** – live countdown, timeline, route map, ticket link (QR) and calendar file.
+
+Returning visitors get a "skip to the programme" link (stored in `localStorage`).
+
+## Develop
+
 ```bash
-git clone https://github.com/yourusername/karoline-julegave.git
+cd birthday-gift
+npm install
+npm run dev     # open http://localhost:5173/#itinerary (or #journey-3, #quiz …) to jump to a stage
+npm run build
 ```
-Navigate to the project directory:
-```bash
-cd theater-surprise
-```
 
-## Usage
-Instructions on how to use the project will be added here.
-
-## Contributing
-Contributions are welcome! Please fork the repository and create a pull request with your changes.
-
-## License
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
-## Contact
-For any questions or suggestions, please open an issue or contact the project maintainer.
+- Plan, places and copy: `src/data/day.ts`
+- Walking routes (pre-fetched from OSRM / routing.openstreetmap.de): `src/data/routes.json`
+- Photos are from Wikimedia Commons, credited in `src/data/credits.json` and on the page.

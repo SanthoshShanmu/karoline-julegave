@@ -1,0 +1,37 @@
+{
+ "paella": {
+  "author": "Jan Harenburg",
+  "license": "CC BY-SA 4.0",
+  "source": "https://commons.wikimedia.org/wiki/File:01_Paella_Valenciana_original.jpg"
+ },
+ "church": {
+  "author": "Joanbanjo",
+  "license": "CC BY-SA 3.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Esgl%C3%A9sia_de_sant_Valeri_de_Russafa,_campanar.JPG"
+ },
+ "market": {
+  "author": "Joanbanjo",
+  "license": "Public domain",
+  "source": "https://commons.wikimedia.org/wiki/File:Mercat_de_Russafa_i_campanar.JPG"
+ },
+ "peppers": {
+  "author": "Joanbanjo",
+  "license": "CC BY-SA 4.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Mercat_de_Russafa,_pebreres.JPG"
+ },
+ "bravas": {
+  "author": "Juan Emilio Prades Bel",
+  "license": "CC BY 4.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Patatas_bravas._Tapa_de_bar_(Espa%C3%B1a).jpg"
+ },
+ "twilight": {
+  "author": "Diliff",
+  "license": "CC BY-SA 3.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Hemispheric_Twilight_-_Valencia,_Spain_-_Jan_2007.jpg"
+ },
+ "micalet": {
+  "author": "Mihael Grmek",
+  "license": "CC BY-SA 3.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Valencia_-_El_Micalet_01.jpg"
+ }
+}

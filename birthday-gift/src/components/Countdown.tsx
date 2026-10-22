@@ -1,99 +1,43 @@
-import { useState, useEffect } from 'react'
+import { DAY_END, DAY_START } from '../data/day'
+import { useNow } from '../useNow'
 import '../styles/Countdown.css'
 
-const Countdown = () => {
-  const [timeLeft, setTimeLeft] = useState({
-    days: 0,
-    hours: 0,
-    minutes: 0,
-    seconds: 0
-  })
+function split(ms: number) {
+  const s = Math.max(0, Math.floor(ms / 1000))
+  return {
+    days: Math.floor(s / 86400),
+    hours: Math.floor((s / 3600) % 24),
+    minutes: Math.floor((s / 60) % 60),
+    seconds: s % 60,
+  }
+}
 
-  useEffect(() => {
-    const target = new Date('2025-12-24T20:00:00')
-    
-    const calculateTimeLeft = () => {
-      const now = new Date()
-      const difference = target.getTime() - now.getTime()
-      
-      if (difference <= 0) {
-        return { days: 0, hours: 0, minutes: 0, seconds: 0 }
-      }
+const Countdown = ({ variant = 'full' }: { variant?: 'full' | 'teaser' }) => {
+  const now = useNow()
 
-      const days = Math.floor(difference / (1000 * 60 * 60 * 24))
-      const hours = Math.floor((difference / (1000 * 60 * 60)) % 24)
-      const minutes = Math.floor((difference / 1000 / 60) % 60)
-      const seconds = Math.floor((difference / 1000) % 60)
-      
-      return { days, hours, minutes, seconds }
-    }
+  if (now >= DAY_END) {
+    return <p className={`countdown-state ${variant}`}>Takk for en magisk dag 🧡</p>
+  }
+  if (now >= DAY_START) {
+    return <p className={`countdown-state ${variant}`}>Det er i dag! 🥘🎉</p>
+  }
 
-    setTimeLeft(calculateTimeLeft())
-    
-    const interval = setInterval(() => {
-      setTimeLeft(calculateTimeLeft())
-    }, 1000)
-    
-    return () => clearInterval(interval)
-  }, [])
+  const { days, hours, minutes, seconds } = split(DAY_START.getTime() - now.getTime())
+  const units = [
+    { value: days, label: days === 1 ? 'dag' : 'dager' },
+    { value: hours, label: hours === 1 ? 'time' : 'timer' },
+    { value: minutes, label: 'min' },
+    { value: seconds, label: 'sek' },
+  ]
 
   return (
-    <div className="countdown">
-      {/* Animated background elements */}
-      <div className="bg-stars">
-        {[...Array(30)].map((_, i) => (
-          <div 
-            key={i} 
-            className="bg-star"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 3}s`,
-              animationDuration: `${2 + Math.random() * 3}s`
-            }}
-          />
-        ))}
-      </div>
-
-
-
-      <h1 className="countdown-title">
-        <span className="magic-gradient">✨ En magisk overraskelse venter! ✨</span>
-      </h1>
-      
-      <p className="countdown-subtitle">Julaften kl. 20:00 kan du åpne gaven!</p>
-
-      <div className="timer">
-        <div className="timer-block">
-          <span className="timer-value">{String(timeLeft.days).padStart(2, '0')}</span>
-          <span className="timer-label">Dager</span>
+    <div className={`countdown ${variant}`} role="timer" aria-live="off">
+      {units.map((u, i) => (
+        <div className="countdown-tile" key={u.label} style={{ animationDelay: `${i * 80}ms` }}>
+          <span className="countdown-value">{String(u.value).padStart(2, '0')}</span>
+          <span className="countdown-label">{u.label}</span>
         </div>
-        <div className="timer-separator">:</div>
-        <div className="timer-block">
-          <span className="timer-value">{String(timeLeft.hours).padStart(2, '0')}</span>
-          <span className="timer-label">Timer</span>
-        </div>
-        <div className="timer-separator">:</div>
-        <div className="timer-block">
-          <span className="timer-value">{String(timeLeft.minutes).padStart(2, '0')}</span>
-          <span className="timer-label">Min</span>
-        </div>
-        <div className="timer-separator">:</div>
-        <div className="timer-block">
-          <span className="timer-value">{String(timeLeft.seconds).padStart(2, '0')}</span>
-          <span className="timer-label">Sek</span>
-        </div>
-      </div>
-
-      <div className="countdown-footer">
-        <p className="hint-text">🎁 Noe magisk er på vei... 🎁</p>
-        <div className="disney-icons">
-          <span className="floating-icon" style={{ animationDelay: '0s' }}>🏰</span>
-          <span className="floating-icon" style={{ animationDelay: '0.3s' }}>⚡</span>
-          <span className="floating-icon" style={{ animationDelay: '0.6s' }}>❄️</span>
-          <span className="floating-icon" style={{ animationDelay: '0.9s' }}>👑</span>
-        </div>
-      </div>
+      ))}
     </div>
   )
 }

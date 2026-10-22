@@ -1,0 +1,211 @@
+.cover {
+  width: 100%;
+  max-width: 440px;
+  margin: auto 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 12px 0 8px;
+}
+
+.cover-arch {
+  position: relative;
+  width: 100%;
+  border-radius: 220px 220px var(--radius) var(--radius);
+  background: var(--paper);
+  border: 3px solid var(--cobalt);
+  outline: 6px solid var(--paper);
+  box-shadow: var(--shadow), 0 0 0 9px var(--cobalt);
+  padding: 10px 10px 64px;
+  animation: arch-in 1s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  transition: transform 0.9s cubic-bezier(0.6, 0, 0.3, 1), opacity 0.9s ease;
+}
+
+.cover-arch-photo {
+  height: 230px;
+  border-radius: 210px 210px 12px 12px;
+  background: url('/images/micalet.jpg') center 35% / cover;
+  position: relative;
+  overflow: hidden;
+}
+
+.cover-arch-photo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 55%, rgba(255, 250, 241, 0.95));
+}
+
+.cover-arch-body {
+  padding: 0 18px;
+  margin-top: -34px;
+  position: relative;
+}
+
+.cover-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(2.8rem, 13vw, 3.8rem);
+  line-height: 0.95;
+  color: var(--cobalt-deep);
+  letter-spacing: -0.02em;
+}
+
+.cover-title em {
+  font-style: italic;
+  font-weight: 700;
+  background: linear-gradient(100deg, var(--red) 10%, var(--orange) 60%, var(--saffron));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  padding-right: 0.06em;
+}
+
+.cover-lede {
+  margin: 14px 0 6px;
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.cover-text {
+  margin: 0;
+  color: var(--ink-soft);
+}
+
+.cover-teaser {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 2px dotted var(--line);
+}
+
+.cover-teaser-label {
+  display: block;
+  margin-bottom: 8px;
+  font-family: var(--font-hand);
+  font-size: 1.35rem;
+  color: var(--terracotta);
+}
+
+/* ---------- Wax seal ---------- */
+
+.seal {
+  position: absolute;
+  left: 50%;
+  bottom: -46px;
+  width: 92px;
+  height: 92px;
+  margin-left: -46px;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  animation: seal-pulse 2.2s ease-in-out 1.2s infinite;
+  filter: drop-shadow(0 8px 10px rgba(120, 10, 20, 0.35));
+}
+
+.seal-half {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 46% 54% 50% 50% / 52% 48% 52% 48%;
+  background: radial-gradient(circle at 35% 30%, #ff8a3d, var(--red) 62%, #8c0b20);
+  box-shadow: inset 0 0 0 6px rgba(255, 255, 255, 0.08), inset 0 -6px 12px rgba(0, 0, 0, 0.25);
+  transition: transform 0.8s cubic-bezier(0.5, 0, 0.3, 1), opacity 0.8s ease;
+}
+
+.seal-half span {
+  width: 60px;
+  height: 60px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 2px dashed rgba(255, 230, 200, 0.55);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 800;
+  font-size: 2rem;
+  color: #ffe2c2;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
+}
+
+.seal-half.left {
+  clip-path: polygon(0 0, 52% 0, 44% 22%, 56% 40%, 46% 58%, 55% 78%, 48% 100%, 0 100%);
+}
+
+.seal-half.right {
+  clip-path: polygon(52% 0, 100% 0, 100% 100%, 48% 100%, 55% 78%, 46% 58%, 56% 40%, 44% 22%);
+}
+
+.cover-hint {
+  margin: 62px 0 0;
+  font-family: var(--font-hand);
+  font-size: 1.5rem;
+  color: var(--cobalt);
+  animation: bob 2.2s ease-in-out infinite;
+}
+
+.cover-skip {
+  margin-top: 4px;
+}
+
+/* Opening sequence */
+.cover.is-opening .seal {
+  animation: none;
+}
+
+.cover.is-opening .seal-half.left {
+  transform: translate(-46px, 30px) rotate(-38deg);
+  opacity: 0;
+}
+
+.cover.is-opening .seal-half.right {
+  transform: translate(46px, 30px) rotate(38deg);
+  opacity: 0;
+}
+
+.cover.is-opening .cover-arch {
+  transform: scale(1.06) translateY(-12px);
+  opacity: 0;
+  transition-delay: 0.35s;
+}
+
+.cover.is-opening .cover-hint,
+.cover.is-opening .cover-skip {
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+@keyframes arch-in {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes seal-pulse {
+  0%,
+  100% {
+    transform: scale(1) rotate(0);
+  }
+  50% {
+    transform: scale(1.08) rotate(-4deg);
+  }
+}
+
+@keyframes bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}

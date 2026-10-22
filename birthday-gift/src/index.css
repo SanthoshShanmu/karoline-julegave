@@ -1,62 +1,199 @@
 :root {
-  font-family: 'Segoe UI', Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-  font-size: 16px;
+  /* Valencia: azulejo cobalt, Senyera red & gold, taronja orange, saffron, terracotta, orange-leaf green */
+  --cobalt: #1f3a93;
+  --cobalt-deep: #14286b;
+  --cream: #fbf5ea;
+  --paper: #fffaf1;
+  --ink: #1d1a33;
+  --ink-soft: #5a5470;
+  --red: #c8102e;
+  --gold: #fcd116;
+  --orange: #f07b1f;
+  --saffron: #e79a12;
+  --terracotta: #c65d3b;
+  --leaf: #4e7a3a;
+  --line: #e3d8c3;
 
-  color-scheme: dark;
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'Nunito Sans', system-ui, -apple-system, sans-serif;
+  --font-hand: 'Caveat', cursive;
+
+  --radius: 22px;
+  --shadow: 0 18px 40px -18px rgba(20, 40, 107, 0.45), 0 2px 6px rgba(20, 40, 107, 0.12);
+
+  font-family: var(--font-body);
+  line-height: 1.55;
+  font-size: 16px;
+  color: var(--ink);
+  color-scheme: light;
+  -webkit-font-smoothing: antialiased;
+}
+
+@property --sky-top {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #9fd3f2;
+}
+
+@property --sky-bottom {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #fff4dc;
 }
 
 * {
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   min-height: 100%;
-  width: 100%;
   overflow-x: hidden;
-  background: #0a0a2e;
-}
-
-body {
-  display: flex;
-  min-height: 100vh;
+  background: var(--cream);
 }
 
 #root {
-  flex: 1;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+a {
+  color: var(--cobalt);
+}
+
+.app {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: max(20px, env(safe-area-inset-top)) 16px max(28px, env(safe-area-inset-bottom));
   display: flex;
-  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--cream);
+  background-image: radial-gradient(ellipse at 50% 35%, rgba(251, 245, 234, 0.96) 0%, rgba(251, 245, 234, 0.78) 55%, rgba(251, 245, 234, 0.35) 100%),
+    url('/azulejo.svg');
+  background-size: auto, 96px 96px;
+  background-attachment: fixed, scroll;
 }
 
-/* Custom scrollbar for the magical theme */
-::-webkit-scrollbar {
-  width: 10px;
+.app.stage-journey {
+  background: none;
 }
 
-::-webkit-scrollbar-track {
-  background: #1a1a4e;
+/* ---------- Shared bits ---------- */
+
+.eyebrow {
+  margin: 0 0 8px;
+  font-family: var(--font-hand);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--terracotta);
+  line-height: 1;
 }
 
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #ffd700, #ff69b4);
-  border-radius: 5px;
+.stage-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(2rem, 7vw, 2.8rem);
+  line-height: 1.05;
+  color: var(--cobalt-deep);
+  letter-spacing: -0.01em;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #ffec8b, #ffb6c1);
+.stage-sub {
+  margin: 10px 0 0;
+  color: var(--ink-soft);
+  font-size: 1.05rem;
 }
 
-/* Selection color */
-::selection {
-  background: rgba(255, 215, 0, 0.3);
-  color: white;
+.stage-enter {
+  animation: rise 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
 
-@media (max-width: 768px) {
-  :root {
-    font-size: 14px;
+.primary-button,
+.ghost-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 52px;
+  padding: 0 24px;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 1.02rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.primary-button {
+  border: none;
+  color: var(--paper);
+  background: linear-gradient(135deg, var(--orange), var(--red));
+  box-shadow: 0 10px 24px -10px rgba(200, 16, 46, 0.7);
+}
+
+.ghost-button {
+  border: 2px solid var(--cobalt);
+  color: var(--cobalt);
+  background: var(--paper);
+}
+
+.primary-button:active,
+.ghost-button:active {
+  transform: scale(0.96);
+}
+
+.primary-button:disabled,
+.ghost-button:disabled {
+  opacity: 0.35;
+  cursor: default;
+  transform: none;
+}
+
+.link-button {
+  margin-top: 18px;
+  padding: 8px;
+  border: none;
+  background: none;
+  color: var(--ink-soft);
+  font-size: 0.92rem;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

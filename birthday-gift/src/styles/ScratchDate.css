@@ -1,0 +1,103 @@
+.scratch {
+  width: 100%;
+  max-width: 440px;
+  margin: auto 0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.scratch-card {
+  position: relative;
+  width: 100%;
+  max-width: 340px;
+  aspect-ratio: 1;
+  margin: 26px 0 22px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--paper);
+  box-shadow: var(--shadow), 0 0 0 8px var(--paper), 0 0 0 10px var(--cobalt);
+}
+
+.scratch-under {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 50% 40%, #fff3d6, var(--paper) 70%);
+}
+
+.scratch-weekday {
+  font-family: var(--font-hand);
+  font-size: 2.2rem;
+  color: var(--terracotta);
+  line-height: 1;
+}
+
+.scratch-day {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 8.5rem;
+  line-height: 0.9;
+  background: linear-gradient(160deg, var(--orange), var(--red));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.scratch-month {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.5rem;
+  color: var(--cobalt-deep);
+}
+
+.scratch-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+  cursor: grab;
+  transition: opacity 0.6s ease;
+}
+
+.scratch-card.is-revealed .scratch-canvas {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.scratch-card.is-revealed .scratch-day {
+  animation: pop 0.6s cubic-bezier(0.2, 1.6, 0.4, 1) both;
+}
+
+.scratch-after {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.5s ease 0.3s, transform 0.5s ease 0.3s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+.scratch-after .stage-sub {
+  margin: 0;
+}
+
+.scratch-after.visible {
+  opacity: 1;
+  transform: none;
+}
+
+@keyframes pop {
+  from {
+    transform: scale(0.6);
+  }
+  to {
+    transform: none;
+  }
+}
